@@ -5,11 +5,34 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 const refs = {
  input: document.querySelector("#datetime-picker"),
  startBtn: document.querySelector('button[data-start]'),
-valueDays: document.querySelector("[data-days]"),
-valueHours: document.querySelector("[data-hours]"),
+ valueDays: document.querySelector("[data-days]"),
+ valueHours: document.querySelector("[data-hours]"),
  valueMinutes: document.querySelector("[data-minutes]"),
  valueSeconds: document.querySelector("[data-seconds]"),
+ timer: document.querySelector('.timer'),
+ field: document.querySelectorAll('.field'),
 }
+refs.timer.style.display = "flex";
+refs.timer.style.gap = "16px";
+
+refs.field[0].style.alignItems="center"
+refs.field[0].style.display = "flex";
+refs.field[0].style.flexDirection = "column";
+
+refs.field[1].style.alignItems="center"
+refs.field[1].style.display = "flex";
+refs.field[1].style.flexDirection = "column";
+
+refs.field[2].style.alignItems="center"
+refs.field[2].style.display = "flex";
+refs.field[2].style.flexDirection = "column";
+
+refs.field[3].style.alignItems="center"
+refs.field[3].style.display = "flex";
+refs.field[3].style.flexDirection = "column";
+
+
+console.log(refs.field[0]);
 
 refs.startBtn.setAttribute('disabled', "");
 
