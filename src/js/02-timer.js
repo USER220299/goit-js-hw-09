@@ -3,36 +3,27 @@ import "flatpickr/dist/flatpickr.min.css";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const refs = {
- input: document.querySelector("#datetime-picker"),
- startBtn: document.querySelector('button[data-start]'),
+input: document.querySelector("#datetime-picker"),
+startBtn: document.querySelector('button[data-start]'),
+timer: document.querySelector('.timer'),
+fields: document.querySelectorAll('.field'),
  valueDays: document.querySelector("[data-days]"),
  valueHours: document.querySelector("[data-hours]"),
  valueMinutes: document.querySelector("[data-minutes]"),
  valueSeconds: document.querySelector("[data-seconds]"),
- timer: document.querySelector('.timer'),
- field: document.querySelectorAll('.field'),
+
 }
+
 refs.timer.style.display = "flex";
-refs.timer.style.gap = "16px";
+refs.timer.style.gap = "10px";
 
-refs.field[0].style.alignItems="center"
-refs.field[0].style.display = "flex";
-refs.field[0].style.flexDirection = "column";
+const field = Array.from(refs.fields);
 
-refs.field[1].style.alignItems="center"
-refs.field[1].style.display = "flex";
-refs.field[1].style.flexDirection = "column";
-
-refs.field[2].style.alignItems="center"
-refs.field[2].style.display = "flex";
-refs.field[2].style.flexDirection = "column";
-
-refs.field[3].style.alignItems="center"
-refs.field[3].style.display = "flex";
-refs.field[3].style.flexDirection = "column";
-
-
-console.log(refs.field[0]);
+field.map(field => {
+  field.style.alignItems = "center";
+  field.style.display = "flex";
+  field.style.flexDirection = "column";
+});
 
 refs.startBtn.setAttribute('disabled', "");
 
@@ -65,16 +56,14 @@ function onClick(selectedDates) {
 setInterval(() => {
   const currentDate = Date.now();
   const deltaTime = startDate - currentDate;
-  
   const  { days, hours, minutes, seconds } = convertMs(deltaTime);
   console.log(`${days}:${hours}:${minutes}:${seconds}`)
   updateClockFace( { days, hours, minutes, seconds })
 }, 1000)
+      
+    }
+    
   }
-  
-
-  }
-  
   timer.start()
 }
 
@@ -86,14 +75,9 @@ refs.valueDays.textContent=`${days}`
   refs.valueSeconds.textContent=`${seconds}`
 }
 
-
-
-
-
 function addLeadingZero(value) {
   return String(value).padStart(2, "0");
 }
-
 
 function convertMs(ms) {
   const second = 1000;
