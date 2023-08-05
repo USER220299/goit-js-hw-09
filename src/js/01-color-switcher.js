@@ -1,8 +1,7 @@
 const body = document.querySelector('body');
 const startBtn = document.querySelector('button[data-start]');
 const stoptBtn = document.querySelector('button[data-stop]');
-console.log(startBtn);
-console.log(stoptBtn);
+
 
 startBtn.addEventListener('click', getRandomHexColor);
 stoptBtn.addEventListener('click', stopRandomHexColor);

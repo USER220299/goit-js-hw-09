@@ -33,26 +33,27 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    console.log(selectedDates[0]);
-    if (new Date() > selectedDates[0] ) {
+    console.log(selectedDates[0])
+  
+    if (options.defaultDate > selectedDates[0] ) {
      Notify.failure("Please choose a date in the future");
      
   } else {
       refs.startBtn.removeAttribute('disabled', "");
-      refs.startBtn.addEventListener('click', onClick(selectedDates[0]));
-
+       refs.startBtn.addEventListener('click', () => { onClickStart(selectedDates[0]) });
     }
+   
   }
 
 };
 
 flatpickr("#datetime-picker", options);
 
-function onClick(selectedDates) {
+function onClickStart(futureDates) {
   const timer = {
   start() {
-    const startDate = selectedDates;
-   
+    const startDate = futureDates;
+  
 setInterval(() => {
   const currentDate = Date.now();
   const deltaTime = startDate - currentDate;
@@ -60,13 +61,12 @@ setInterval(() => {
   console.log(`${days}:${hours}:${minutes}:${seconds}`)
   updateClockFace( { days, hours, minutes, seconds })
 }, 1000)
-      
     }
-    
+
   }
+  
   timer.start()
 }
-
 
 function updateClockFace({ days, hours, minutes, seconds }){
 refs.valueDays.textContent=`${days}`
@@ -93,7 +93,5 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
-// console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
-// console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
-// console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
+
 
