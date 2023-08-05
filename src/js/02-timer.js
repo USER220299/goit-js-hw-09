@@ -40,7 +40,8 @@ const options = {
      
   } else {
       refs.startBtn.removeAttribute('disabled', "");
-       refs.startBtn.addEventListener('click', () => { onClickStart(selectedDates[0]) });
+      refs.startBtn.addEventListener('click', () => { onClickStart(selectedDates[0]) });
+      
     }
    
   }
@@ -50,6 +51,7 @@ const options = {
 flatpickr("#datetime-picker", options);
 
 function onClickStart(futureDates) {
+  refs.startBtn.setAttribute('disabled', "");
   const timer = {
   start() {
     const startDate = futureDates;
