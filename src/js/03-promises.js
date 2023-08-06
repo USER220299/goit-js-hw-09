@@ -8,26 +8,22 @@ function submit(event) {
   event.preventDefault();
 
   const formEl = event.currentTarget.elements;
- const delay = Number( formEl.delay.value);
- const step = Number(formEl.step.value);
-  const amount =formEl.amount.value;
+  let delay = Number( formEl.delay.value);
+  const step = Number(formEl.step.value);
+  const amount =Number(formEl.amount.value);
 
   for (let i = 0; i < amount; i += 1){
-
-     const delayStep = delay+ step *i
-    const position = i+amount.length
-
+    const delayStep = delay+step*i
+    const position = i+1;
     setTimeout(() => {
-
-  createPromise(position,delayStep).then((result) => {
+       createPromise(position,delayStep).then((result) => {
     Notify.success(result);
   })
   .catch((error) => {
    Notify.failure(error);
   });
-
-    },step *(i + 1) )
-
+    }, step*(i+1))
+   
   }
 
 }
@@ -48,3 +44,4 @@ function createPromise(position, delay) {
   return promis;
 }
     
+

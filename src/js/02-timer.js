@@ -53,21 +53,30 @@ flatpickr("#datetime-picker", options);
 function onClickStart(futureDates) {
   refs.startBtn.setAttribute('disabled', "");
   const timer = {
+    intervalId: null,
+  
   start() {
     const startDate = futureDates;
   
-setInterval(() => {
+ this.intervalId=setInterval(() => {
   const currentDate = Date.now();
-  const deltaTime = startDate - currentDate;
-  const  { days, hours, minutes, seconds } = convertMs(deltaTime);
+   const deltaTime = startDate - currentDate;
+   if (deltaTime > 0) {
+      const  { days, hours, minutes, seconds } = convertMs(deltaTime);
   console.log(`${days}:${hours}:${minutes}:${seconds}`)
   updateClockFace( { days, hours, minutes, seconds })
+   } else {
+      clearInterval(this.intervalId)
+   }
+ 
 }, 1000)
-    }
-
+    },
   }
   
-  timer.start()
+  timer.start();
+  
+
+  
 }
 
 function updateClockFace({ days, hours, minutes, seconds }){
